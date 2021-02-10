@@ -1,10 +1,12 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const path = require('path');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 const app = express();
+
 
 app.use(logger("dev"));
 
@@ -18,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useFindAndModify: false,
   useUnifiedTopology: true
 });
+
 
 // routes
 app.use(require("./routes/apiroutes.js"));

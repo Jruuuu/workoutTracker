@@ -191,11 +191,23 @@ function calculateTotalWeight(data) {
   return totals;
 }
 
+function duration(data) {
+  let durations = [];
+
+  data.forEach(workout => {
+    workout.exercises.forEach(exercise => {
+      durations.push(exercise.duration);
+    });
+  });
+
+  return durations;
+}
+
 function workoutNames(data) {
   let workouts = [];
 
-  data.forEach((workout) => {
-    workout.exercises.forEach((exercise) => {
+  data.forEach(workout => {
+    workout.exercises.forEach(exercise => {
       workouts.push(exercise.name);
     });
   });
@@ -203,6 +215,14 @@ function workoutNames(data) {
   // return de-duplicated array with JavaScript `Set` object
   return [...new Set(workouts)];
 }
+
+fetch("/api/workouts/range")
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    populateChart(data);
+  });
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
