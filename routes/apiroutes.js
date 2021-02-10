@@ -31,7 +31,6 @@ router.get("/api/workouts/range",(req, res) => {
             }
         }
     ]).sort({day: -1}).limit(7).then((workoutData) => {
-        console.log(workoutData)
         res.json(workoutData);
     });
 });
